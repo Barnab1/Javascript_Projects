@@ -1,12 +1,12 @@
 //Variables fetching
-
-const githubUserName = document.getElementById('github_user').value.trim().toLowerCase();
+const githubUserName = document.getElementById('github_user');
 const personalToken = document.getElementById('personal_token')
 const searchBtn = document.getElementById('search_github');
 
-const findUserInformation = (username, personalToken="")=>{
 
-const headers = personalToken ? { "Authorization": `Bearer ${token}` } : {}; // Use an empty object when no token
+const findUserInformation = (username, personalToken ="")=>{
+
+const headers = personalToken ? { "Authorization": `Bearer ${personalToken}` } : {}; // Use an empty object when no token
 
 fetch(`https://api.github.com/users/${username}`, { headers })
   .then(response => {
@@ -19,3 +19,10 @@ fetch(`https://api.github.com/users/${username}`, { headers })
   .catch(error => console.error("Error fetching user info:", error));
 
 }
+
+searchBtn.addEventListener('click', (e)=>{
+  const username = githubUserName.value;
+  e.preventDefault();
+  console.log(username);
+  findUserInformation(username,"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");
+})
