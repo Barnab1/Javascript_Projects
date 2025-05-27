@@ -24,5 +24,5 @@ searchBtn.addEventListener('click', (e)=>{
   const username = githubUserName.value;
   e.preventDefault();
   console.log(username);
-  findUserInformation(username,"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");
+  findUserInformation(username,"");
 })
