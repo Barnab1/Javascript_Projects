@@ -1,5 +1,5 @@
 # PURPOSE
-Hi Dear, that repository is all about js projects I did to train myself about JS. I want you to do so
+Hi Dear, that repository is all about javascript projects I did to train myself about javascript.
 
 # PROJECTS
     * QUIZ GAME: A game made while learning Javascript from Sitepoint Book: Javascript
