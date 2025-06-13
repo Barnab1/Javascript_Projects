@@ -6,3 +6,5 @@ Hi Dear, that repository is all about javascript projects I did to train myself 
 
     * Number Guessing Game: Make Computer do the Number Guessing Game for you to watch
                             A simple game made to practice Javascript <i>Objects</i>
+
+   * Github User Finder: Findind github User through their name
