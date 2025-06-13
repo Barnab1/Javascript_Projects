@@ -1,36 +1,30 @@
 //Variables fetching
 const githubUserName = document.getElementById('github_user');
 const personalToken = document.getElementById('personal_token')
-const searchBtn = document.getElementById('search_github');
+const form = document.getElementById('form');
 const response = document.getElementById('response');
 
-const findUserInformation = (username, personalToken ="")=>{
-
-const headers = personalToken ? { "Authorization": `Bearer ${personalToken}` } : {}; // Use an empty object when no token
-
-fetch(`https://api.github.com/users/${username}`, { headers })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(data =>
-    { 
-    
-    console.log(data);
-    const result = `
-    <img class="profile" src="${data['avatar_url']}" alt="Github user profile">
-    <div class="user-information">
-       <p id="github_username">Github username:<strong>${data['login']}</strong></p>
-       <a href="${data['html_url']}" target="_blank">Find on Github</a> 
-    </div>
-</div>`;
-  response.innerHTML= result;
-
+const findUserInformation = async (username)=>{
+try{
+  const res = await fetch(`https://api.github.com/users/${username}`);
+  if (!res.ok){
+    throw new Error("User not found");
+  }
+  const data = await res.json();
+  response.innerHTML = 
+  `
+    <img src="${data.avatar_url}" width="100" />
+    <h2>${data.name || data.login}</h2>
+    <p>${data.bio ?? "No bio available."}</p>
+    <p> 👥 Followers: ${data.followers} | Following: ${data.following} </p>
+    <p> 📁 Public Repos: ${data.public_repos} </p>
+    <a href="${data.html_url}" target="_blank">Connect with ${data.login}</a>
+  `
+}catch(err){
+  response.innerHTML = `<p>User not found </p> ❌`;
 }
-  )
-  .catch(error => response.innerHTML = `Github User not Found, Please try again`);
+
+
 
 }
 const sanitizeInput = userInput =>{
@@ -56,14 +50,17 @@ const enableButton = ()=>{
   searchBtn.style.color = "#000";
 }
 
-searchBtn.addEventListener('click', (e)=>{
+form.addEventListener('submit', async (e)=>{
   
-  disableButton();
+  //disableButton();
   e.preventDefault();
   const username = sanitizeInput(githubUserName.value);
   checkEmptyInput(username);
 
   console.log(username);
+
+  response.innerHTML = "<p>Loading...</p>";
+
   findUserInformation(username);
   enableButton();
 })

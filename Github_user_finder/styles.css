@@ -7,6 +7,7 @@ body{
 }
 main{
     margin: 10px auto;
+    padding: 25px;
 }
 
 h1.title{
@@ -46,7 +47,7 @@ header{
     gap: 5px;
 }
 
-.form_container form input{
+.form_container form input{ 
     width:80% ;
 }
 
@@ -63,13 +64,8 @@ button{
     padding: 10px;
     display: flex;
     align-items: center;
-    gap: 15px;
-}
-
-.profile{
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    gap: 5px;
+    flex-direction: column;
 }
 
 a{
